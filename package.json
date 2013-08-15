@@ -1,0 +1,31 @@
+{
+    "author": {
+        "name": "Matthew J. Morrison",
+        "email": "mattjmorrison@mattjmorrison.com"
+    },
+    "name": "grunt-karma-coveralls",
+    "description": "An npm module for using Karma and Coveralls with Grunt",
+    "version": "0.0.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mattjmorrison/grunt-karma-coveralls"
+    },
+    "keywords": [
+        "Grunt.js",
+        "Karma",
+        "Coveralls.js"
+    ],
+    "main": "./lib/main",
+    "engines": {
+        "node": ">=v0.8.1"
+    },
+    "licenses": [
+        "MIT"
+    ],
+    "readmeFilename": "README.md",
+    "dependencies": {
+        "coveralls": "~2.1.0",
+        "karma-coverage": "~0.1.0",
+        "glob": "*"
+    }
+}
