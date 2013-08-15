@@ -1,13 +1,32 @@
 module.exports = function(grunt){
-    var glob = require('glob');
     var fs = require('fs');
-    var handleInput = require('coveralls/lib/handleInput');
+    var glob = require('glob');
+    var sendToCoveralls = require('coveralls/lib/sendToCoveralls');
+    var convertLcovToCoveralls = require('coveralls/lib/convertLcovToCoveralls');
 
     grunt.task.registerTask('coveralls', 'Coveralls coverage with Karma', function(){
+        var done = this.async();
         var options = grunt.config('coveralls.options');
-        lcov_path = glob.sync(options.coverage_dir + "/**/lcov.info")[0];
-        process.env.COVERALLS_REPO_TOKEN = options.repo_token;
-        process.env.COVERALLS_SERVICE_NAME = options.service_name;
-        handleInput(fs.readFileSync(lcov_path).toString());
+        options.filepath = ".";
+        var lcov_path = glob.sync(options.coverage_dir + "/**/lcov.info")[0];
+        var input = fs.readFileSync(lcov_path).toString();
+
+        convertLcovToCoveralls(input, options, function(err, postData){
+            if (err){
+                done();
+                throw err;
+            }
+            sendToCoveralls(postData, function(err, response, body){
+                if (err){
+                    done();
+                    throw err;
+                }
+                if (response.statusCode >= 400){
+                    done();
+                    throw "Bad response: " + response.statusCode + " " + body;
+                }
+                done();
+            });
+        });
     });
 };
