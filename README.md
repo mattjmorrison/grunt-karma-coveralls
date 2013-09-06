@@ -20,8 +20,6 @@ grunt.loadNpmTasks('grunt-karma-coveralls');
 ```js
 coveralls: {
     options: {
-        repo_token: 'your coveralls repo token',
-        service_name: 'your coveralls service name',
         coverage_dir: 'directory name'
     }
 }
@@ -44,3 +42,8 @@ plugins: [
     'karma-coverage',
 ]
 ```
+
+## Notes
+
+Currently, this module is only set up to work with travis-ci. If you are interested in using
+this with anything other than travis-ci, create an issue and I will gladly add it.
