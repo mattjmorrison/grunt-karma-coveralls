@@ -9,7 +9,7 @@ module.exports = function(grunt){
         var options = grunt.config('coveralls.options');
         options.filepath = ".";
         options.service_name =  'travis-ci';
-        options.sersvice_jobj_id = process.env.TRAVIS_JOB_ID;
+        options.service_job_id = process.env.TRAVIS_JOB_ID;
         var lcov_path = glob.sync(options.coverage_dir + "/**/lcov.info")[0];
         var input = fs.readFileSync(lcov_path).toString();
 
