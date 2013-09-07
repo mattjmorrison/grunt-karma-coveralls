@@ -1,7 +1,7 @@
 module.exports = function(grunt){
     var fs = require('fs');
     var glob = require('glob');
-    var coveralls = require('coveralls/lib/index');
+    var coveralls = require('coveralls/index');
 
     grunt.task.registerTask('coveralls', 'Coveralls coverage with Karma', function(){
         var done = this.async();
