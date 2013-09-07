@@ -42,8 +42,3 @@ plugins: [
     'karma-coverage',
 ]
 ```
-
-## Notes
-
-Currently, this module is only set up to work with travis-ci. If you are interested in using
-this with anything other than travis-ci, create an issue and I will gladly add it.
