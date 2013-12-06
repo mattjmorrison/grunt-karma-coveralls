@@ -1,13 +1,14 @@
 module.exports = function(grunt){
     var fs = require('fs');
     var glob = require('glob');
-    var coveralls = require('coveralls/index');
 
     grunt.task.registerTask('coveralls', 'Coveralls coverage with Karma', function(){
         var done = this.async();
         var gruntOptions = grunt.config('coveralls.options');
+        process.env.NODE_COVERALLS_DEBUG = gruntOptions.debug ? 1 : 0;
         var lcov_path = glob.sync(gruntOptions.coverage_dir + "/**/lcov.info")[0];
         var input = fs.readFileSync(lcov_path).toString();
+        var coveralls = require('coveralls/index');
 
         coveralls.getBaseOptions(function(err, options){
             options.filepath = ".";
