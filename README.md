@@ -20,6 +20,7 @@ grunt.loadNpmTasks('grunt-karma-coveralls');
 ```js
 coveralls: {
     options: {
+        debug: true,
         coverage_dir: 'directory name'
     }
 }
