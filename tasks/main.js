@@ -9,20 +9,25 @@ function main(grunt){
     var gruntOptions = grunt.config('coveralls.options');
     process.env.NODE_COVERALLS_DEBUG = gruntOptions.debug ? 1 : 0;
     var input = getInput(gruntOptions.coverage_dir);
-    callCoveralls(done, input);
+    callCoveralls(done, input, gruntOptions);
   });
 
 };
 
-function callCoveralls(done, input){
+function callCoveralls(done, input, gruntOptions){
   var coveralls = require('coveralls/index');
   coveralls.getBaseOptions(function(err, options){
     options.filepath = ".";
     coveralls.convertLcovToCoveralls(input, options, function(err, postData){
       handleError(done, err);
-      coveralls.sendToCoveralls(postData, function(err, response, body){
-        sendToCoverallsCallback(done, err, response, body);
-      });
+      if (!gruntOptions.dryRun) {
+        coveralls.sendToCoveralls(postData, function(err, response, body){
+          sendToCoverallsCallback(done, err, response, body);
+        });
+      } else {
+        fs.writeFileSync(gruntOptions.coverage_dir + '/coveralls.json', JSON.stringify(postData));
+        done();
+      }
     });
   });
 }
