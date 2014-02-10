@@ -22,7 +22,7 @@ function callCoveralls(done, input, gruntOptions){
       handleError(done, err);
       if (!gruntOptions.dryRun) {
         coveralls.sendToCoveralls(postData, function(err, response, body){
-          sendToCoverallsCallback(done, err, response, body);
+          sendToCoverallsCallback(done, err, response, body, gruntOptions.force);
         });
       } else {
         fs.writeFileSync(gruntOptions.coverage_dir + '/coveralls.json', JSON.stringify(postData));
@@ -34,15 +34,15 @@ function callCoveralls(done, input, gruntOptions){
 
 function handleError(done, err) {
   if (err){
-    done();
+    done(force);
     throw err;
   }
 }
 
-function sendToCoverallsCallback(done, err, response, body){
+function sendToCoverallsCallback(done, err, response, body, force){
   handleError(done, err);
   if (response.statusCode >= 400){
-    handleError(done, "Bad response:" + response.statusCode + " " + body);
+    handleError(done, "Bad response:" + response.statusCode + " " + body, force);
   }
   done();
 }
