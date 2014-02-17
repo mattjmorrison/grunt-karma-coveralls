@@ -32,7 +32,7 @@ function callCoveralls(done, input, gruntOptions){
   });
 }
 
-function handleError(done, err) {
+function handleError(done, err, force) {
   if (err){
     done(force);
     throw err;
