@@ -19,7 +19,7 @@ function callCoveralls(done, input, gruntOptions){
   coveralls.getBaseOptions(function(err, options){
     options.filepath = ".";
     coveralls.convertLcovToCoveralls(input, options, function(err, postData){
-      handleError(done, err);
+      handleError(done, err, gruntOptions.force);
       if (!gruntOptions.dryRun) {
         coveralls.sendToCoveralls(postData, function(err, response, body){
           sendToCoverallsCallback(done, err, response, body, gruntOptions.force);
@@ -35,12 +35,14 @@ function callCoveralls(done, input, gruntOptions){
 function handleError(done, err, force) {
   if (err){
     done(force);
-    throw err;
+    if (!force) {
+      throw err;
+    }
   }
 }
 
 function sendToCoverallsCallback(done, err, response, body, force){
-  handleError(done, err);
+  handleError(done, err, force);
   if (response.statusCode >= 400){
     handleError(done, "Bad response:" + response.statusCode + " " + body, force);
   }
