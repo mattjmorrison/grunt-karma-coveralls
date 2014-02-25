@@ -19,10 +19,10 @@ function callCoveralls(done, input, gruntOptions){
   coveralls.getBaseOptions(function(err, options){
     options.filepath = ".";
     coveralls.convertLcovToCoveralls(input, options, function(err, postData){
-      handleError(done, err);
+      handleError(done, err, gruntOptions.force);
       if (!gruntOptions.dryRun) {
         coveralls.sendToCoveralls(postData, function(err, response, body){
-          sendToCoverallsCallback(done, err, response, body);
+          sendToCoverallsCallback(done, err, response, body, gruntOptions.force);
         });
       } else {
         fs.writeFileSync(gruntOptions.coverage_dir + '/coveralls.json', JSON.stringify(postData));
@@ -32,17 +32,19 @@ function callCoveralls(done, input, gruntOptions){
   });
 }
 
-function handleError(done, err) {
+function handleError(done, err, force) {
   if (err){
-    done();
-    throw err;
+    done(force);
+    if (!force) {
+      throw err;
+    }
   }
 }
 
-function sendToCoverallsCallback(done, err, response, body){
-  handleError(done, err);
+function sendToCoverallsCallback(done, err, response, body, force){
+  handleError(done, err, force);
   if (response.statusCode >= 400){
-    handleError(done, "Bad response:" + response.statusCode + " " + body);
+    handleError(done, "Bad response:" + response.statusCode + " " + body, force);
   }
   done();
 }
