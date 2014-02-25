@@ -21,10 +21,28 @@ grunt.loadNpmTasks('grunt-karma-coveralls');
 coveralls: {
     options: {
         debug: true,
-        coverage_dir: 'directory name'
+        coverage_dir: 'directory name',
+        dryRun: true,
+        force: true
     }
 }
 ```
+
+## Optional Configuration Options
+
+```js
+dryRun: [boolean]
+```
+
+Using this option you can run coverage without sending data to the coveralls service and instead writing
+the results to coveralls.json.
+
+```js
+force: [boolean]
+```
+
+Using this option you can ensure that if there is a failure, ie: the coveralls service is down, your grunt tasks will continue to run and not terminate due to the error.
+
 
 If you haven't used [Karma](http://karma-runner.github.io/) before, check out the video on the homepage.
 
