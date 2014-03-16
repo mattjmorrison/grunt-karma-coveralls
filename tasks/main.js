@@ -43,7 +43,7 @@ function handleError(done, err, force) {
 
 function sendToCoverallsCallback(done, err, response, body, force){
   handleError(done, err, force);
-  if (response.statusCode >= 400){
+  if (response && 'status_code' in response && response.statusCode >= 400){
     handleError(done, "Bad response:" + response.statusCode + " " + body, force);
   }
   done();
