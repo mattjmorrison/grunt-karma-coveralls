@@ -43,7 +43,7 @@ function handleError(done, err, force) {
 
 function sendToCoverallsCallback(done, err, response, body, force){
   handleError(done, err, force);
-  if (response && 'status_code' in response && response.statusCode >= 400){
+  if (response && 'statusCode' in response && response.statusCode >= 400){
     if (response.statusCode === 503){
       logger.warn("Coveralls is currently down for maintenance");
     }
