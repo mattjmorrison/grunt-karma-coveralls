@@ -23,7 +23,8 @@ coveralls: {
         debug: true,
         coverage_dir: 'directory name',
         dryRun: true,
-        force: true
+        force: true,
+        recursive: true
     }
 }
 ```
@@ -42,6 +43,13 @@ force: [boolean]
 ```
 
 Using this option you can ensure that if there is a failure, ie: the coveralls service is down, your grunt tasks will continue to run and not terminate due to the error.
+
+```js
+revursive: [boolean]
+```
+
+This option defaults to ``true``. If it is set to true ``coverage_dir`` will be searched recursively for ``lcov.info``.
+Otherwise the subdirectories will be ignored.
 
 
 If you haven't used [Karma](http://karma-runner.github.io/) before, check out the video on the homepage.
