@@ -8,7 +8,7 @@ function main(grunt){
     var done = this.async();
     var gruntOptions = grunt.config('coveralls.options');
     process.env.NODE_COVERALLS_DEBUG = gruntOptions.debug ? 1 : 0;
-    gruntOptions.recursive = gruntOptions.recursive || true;
+    gruntOptions.recursive = typeof gruntOptions.recursive === 'undefined' ? true : gruntOptions.recursive;
     var input = getInput(gruntOptions.coverage_dir, gruntOptions.recursive);
     callCoveralls(done, input, gruntOptions);
   });
