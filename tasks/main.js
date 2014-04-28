@@ -8,7 +8,8 @@ function main(grunt){
     var done = this.async();
     var gruntOptions = grunt.config('coveralls.options');
     process.env.NODE_COVERALLS_DEBUG = gruntOptions.debug ? 1 : 0;
-    var input = getInput(gruntOptions.coverage_dir);
+    gruntOptions.recursive = typeof gruntOptions.recursive === 'undefined' ? true : gruntOptions.recursive;
+    var input = getInput(gruntOptions.coverage_dir, gruntOptions.recursive);
     callCoveralls(done, input, gruntOptions);
   });
 
@@ -54,8 +55,9 @@ function sendToCoverallsCallback(done, err, response, body, force){
   done();
 }
 
-function getInput(basePath){
-  var lcov_path = glob.sync(basePath + "/**/lcov.info")[0];
+function getInput(basePath, recursive){
+  var subdirs = recursive ? "/**" : "";
+  var lcov_path = glob.sync(basePath + subdirs + "/lcov.info")[0];
   if (!lcov_path){
     logger.error("lcov.info not found in `" + basePath + "`");
   }
