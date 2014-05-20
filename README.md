@@ -45,7 +45,7 @@ force: [boolean]
 Using this option you can ensure that if there is a failure, ie: the coveralls service is down, your grunt tasks will continue to run and not terminate due to the error.
 
 ```js
-revursive: [boolean]
+recursive: [boolean]
 ```
 
 This option defaults to ``true``. If it is set to true ``coverage_dir`` will be searched recursively for ``lcov.info``.
