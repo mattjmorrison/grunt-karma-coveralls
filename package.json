@@ -5,7 +5,7 @@
     },
     "name": "grunt-karma-coveralls",
     "description": "An npm module for using Karma and Coveralls with Grunt",
-    "version": "2.5.1",
+    "version": "2.5.2",
     "repository": {
         "type": "git",
         "url": "https://github.com/mattjmorrison/grunt-karma-coveralls"
@@ -24,10 +24,10 @@
     ],
     "readmeFilename": "README.md",
     "dependencies": {
-        "coveralls": "~2.10.0",
-        "karma-coverage": "~0.2.1",
-        "glob": "*",
-        "log-driver": "~1.2.4"
+        "coveralls": "^2.10",
+        "karma-coverage": "^0.2",
+        "glob": "^4.0",
+        "log-driver": "^1.2"
     },
     "peerDependencies": {
         "grunt": "*"
