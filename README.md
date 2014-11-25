@@ -21,7 +21,7 @@ grunt.loadNpmTasks('grunt-karma-coveralls');
 coveralls: {
     options: {
         debug: true,
-        coverage_dir: 'directory name',
+        coverageDir: 'directory name',
         dryRun: true,
         force: true,
         recursive: true
@@ -48,7 +48,7 @@ Using this option you can ensure that if there is a failure, ie: the coveralls s
 recursive: [boolean]
 ```
 
-This option defaults to ``true``. If it is set to true ``coverage_dir`` will be searched recursively for ``lcov.info``.
+This option defaults to ``true``. If it is set to true ``coverageDir`` will be searched recursively for ``lcov.info``.
 Otherwise the subdirectories will be ignored.
 
 

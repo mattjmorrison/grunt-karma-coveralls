@@ -1,21 +1,26 @@
-var should = require('should');
-var sinon = require('sinon');
-var request = require('request');
 var grunt = require('grunt');
-var sut = require('../tasks/main');
-var assert = require('assert');
 
-describe("grunt-karma-coveralls", function(){
+exports.main = {
 
-  beforeEach(function(){
-    sut(grunt);
-  });
+    deprecatedOldCoverageDir: function(test){
+        test.expect(1);
+        grunt.util.spawn({
+            cmd: 'grunt',
+            args: ['coveralls', '--no-color']
+        }, function(err, result){
+            test.equal(result.stderr, "DEPRECATION: use coverageDir instead of coverage_dir");
+            test.done();
+        });
+    },
+    showErrorMessageWhenNoLCOVData: function(test){
+        test.expect(1);
+        grunt.util.spawn({
+            cmd: 'grunt',
+            args: ['coveralls', '--no-color']
+        }, function(err, result){
+            test.ok(result.stdout.indexOf('lcov.info not found') > 0);
+            test.done();
+        });
+    }
 
-  it("shows error message when lcov data does not exist", function(done){
-    grunt.config('coveralls', {options: {coverage_dir: './dummy/asdf'}});
-    grunt.task.run('coveralls');
-    grunt.task.start();
-    done();
-  });
-
-});
+};

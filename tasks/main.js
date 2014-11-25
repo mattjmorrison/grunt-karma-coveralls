@@ -5,11 +5,16 @@ var logger = require('log-driver')({level: 'debug'});
 function main(grunt){
 
   grunt.task.registerTask('coveralls', 'Coveralls coverage with Karma', function(){
-    var done = this.async();
     var gruntOptions = grunt.config('coveralls.options');
+    if (gruntOptions.coverage_dir){
+        console.warn("DEPRECATION: use coverageDir instead of coverage_dir");
+        gruntOptions.coverageDir = gruntOptions.coverage_dir;
+    }
+
+    var done = this.async();
     process.env.NODE_COVERALLS_DEBUG = gruntOptions.debug ? 1 : 0;
     gruntOptions.recursive = typeof gruntOptions.recursive === 'undefined' ? true : gruntOptions.recursive;
-    var input = getInput(gruntOptions.coverage_dir, gruntOptions.recursive);
+    var input = getInput(gruntOptions.coverageDir, gruntOptions.recursive);
     callCoveralls(done, input, gruntOptions);
   });
 
@@ -26,7 +31,7 @@ function callCoveralls(done, input, gruntOptions){
           sendToCoverallsCallback(done, err, response, body, gruntOptions.force);
         });
       } else {
-        fs.writeFileSync(gruntOptions.coverage_dir + '/coveralls.json', JSON.stringify(postData));
+        fs.writeFileSync(gruntOptions.coverageDir + '/coveralls.json', JSON.stringify(postData));
         done();
       }
     });

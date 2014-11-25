@@ -5,7 +5,7 @@
     },
     "name": "grunt-karma-coveralls",
     "description": "An npm module for using Karma and Coveralls with Grunt",
-    "version": "2.5.2",
+    "version": "2.5.3",
     "repository": {
         "type": "git",
         "url": "https://github.com/mattjmorrison/grunt-karma-coveralls"
@@ -33,10 +33,9 @@
         "grunt": "*"
     },
     "devDependencies": {
-        "grunt": "*",
-        "mocha": "*",
-        "should": "*",
-        "sinon": "*",
-        "request": "~2.34.0"
+        "nodeunit": "*"
+    },
+    "scripts": {
+        "test": "nodeunit"
     }
 }
