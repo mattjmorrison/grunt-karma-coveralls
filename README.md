@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mattjmorrison/grunt-karma-coveralls.svg)](https://travis-ci.org/mattjmorrison/grunt-karma-coveralls)
+
 # grunt-karma-coveralls
 
 
