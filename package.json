@@ -33,6 +33,7 @@
         "grunt": "*"
     },
     "devDependencies": {
+        "grunt": "*",
         "nodeunit": "*"
     },
     "scripts": {
