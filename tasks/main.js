@@ -55,6 +55,7 @@ function sendToCoverallsCallback(done, err, response, body, force){
     }
     else {
       handleError(done, "Bad response:" + response.statusCode + " " + body, force);
+      return;
     }
   }
   done();
