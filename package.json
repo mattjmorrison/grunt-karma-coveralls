@@ -24,9 +24,9 @@
     ],
     "readmeFilename": "README.md",
     "dependencies": {
-        "coveralls": "^2.10",
-        "karma-coverage": "^0.2",
-        "glob": "^4.0",
+        "coveralls": "^3.0.4",
+        "glob": "^7.1.4",
+        "karma-coverage": "^1.1.2",
         "log-driver": "^1.2"
     },
     "peerDependencies": {
