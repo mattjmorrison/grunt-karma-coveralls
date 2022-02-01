@@ -24,10 +24,11 @@
     ],
     "readmeFilename": "README.md",
     "dependencies": {
-        "coveralls": "^2.10",
-        "karma-coverage": "^0.2",
-        "glob": "^4.0",
-        "log-driver": "^1.2"
+        "coveralls": "^3.1.1",
+        "glob": "^7.2.0",
+        "karma-coverage": "^2.1.0",
+        "log-driver": "^1.2.7",
+        "npm-force-resolutions": "^0.0.10"
     },
     "peerDependencies": {
         "grunt": "*"
@@ -37,7 +38,11 @@
         "grunt-cli": "*",
         "nodeunit": "*"
     },
+    "resolutions": {
+        "ansi-regex": "^5.0.1"
+    },
     "scripts": {
+        "preinstall": "npx npm-force-resolutions",
         "test": "nodeunit"
     }
 }
